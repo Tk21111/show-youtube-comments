@@ -26,3 +26,12 @@ function loadScriptAndCss(tab) {
         }
     })
 }
+
+chrome.commands.onCommand.addListener((cmd) => {
+	if ( cmd === "show-scrollbar") {
+		chrome.storage.sync.get(['show-scrollbar'] , value => {
+			const curr = value['show-scrollbar'] || false;
+			chrome.storage.sync.set({'show-scrollbar' : !curr});
+		})
+	}
+})

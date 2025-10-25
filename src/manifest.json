@@ -27,5 +27,13 @@
     },
     "icons": {
         "128": "128.png"
+    },
+    "commands": {
+        "show-scrollbar": {
+            "suggested_key": {
+            "default": "Ctrl+Shift+Q"
+            },
+            "description": "Toggle YouTube comments layout"
+        }
     }
 }

@@ -1,4 +1,5 @@
-showCommentsOnTheRight();
+//init 
+checkShowScrollbarAndCmd();
 
 function showCommentsOnTheRight() {
 	if (!comments() || !watchNext()) {
@@ -42,6 +43,16 @@ function leftPanel() {
 	return document.querySelector('#primary-inner > #below');
 }
 
+function checkShowScrollbarAndCmd() {
+	chrome.storage.sync.get(['show-scrollbar'], value => {
+		if (value['show-scrollbar'] == true) {
+			showCommentsOnTheRight();	
+		}
+		else {
+			resetLayout();
+		}
+	})
+}
 function resetLayout() {
 	if (!comments() || !watchNext()) {
 		window.setTimeout(resetLayout, 500);
@@ -56,6 +67,8 @@ function resetLayout() {
 	rightPanel().appendChild(watchNextNode);
 }
 
+
+
 chrome.storage.onChanged.addListener((changes, area) => {
   if (area === 'sync' && changes['show-scrollbar']) {
     if (changes['show-scrollbar'].newValue) {
@@ -65,3 +78,5 @@ chrome.storage.onChanged.addListener((changes, area) => {
     }
   }
 });
+
+addResizeHandle();
