@@ -68,7 +68,6 @@ function resetLayout() {
 }
 
 
-
 chrome.storage.onChanged.addListener((changes, area) => {
   if (area === 'sync' && changes['show-scrollbar']) {
     if (changes['show-scrollbar'].newValue) {
@@ -79,4 +78,3 @@ chrome.storage.onChanged.addListener((changes, area) => {
   }
 });
 
-addResizeHandle();
