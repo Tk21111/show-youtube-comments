@@ -4,26 +4,25 @@ chrome.runtime.onInstalled.addListener(details => {
   }
 });
 chrome.webNavigation.onCommitted.addListener(loadScriptAndCss, {
-    url: [{
-        urlPrefix: 'https://www.youtube.com/watch'
-    }]
+    url: [
+        { urlPrefix: 'https://www.youtube.com/watch' },
+        { urlPrefix: 'https://www.youtube.com/shorts' },
+        { urlPrefix: 'https://www.youtube.com/live' },
+    ]
 });
 chrome.webNavigation.onHistoryStateUpdated.addListener(loadScriptAndCss, {
-    url: [{
-        urlPrefix: 'https://www.youtube.com/watch'
-    }]
+    url: [
+        { urlPrefix: 'https://www.youtube.com/watch' },
+        { urlPrefix: 'https://www.youtube.com/shorts' },
+        { urlPrefix: 'https://www.youtube.com/live' },
+    ]
 });
 
 function loadScriptAndCss(tab) {
     chrome.scripting.executeScript({target: {tabId: tab.tabId}, files: ["showYoutubeComments.js"]});
     chrome.scripting.insertCSS({target: {tabId: tab.tabId}, files: ["showYoutubeComments.css"]});
     chrome.storage.sync.get(['show-scrollbar'], value => {
-        if (value['show-scrollbar'] == true) {
             chrome.scripting.insertCSS({target: {tabId: tab.tabId}, files: ["showYoutubeComments-scrollbar.css"]});
-        }
-        else {
-            chrome.scripting.removeCSS({target: {tabId: tab.tabId}, files: ["showYoutubeComments-scrollbar.css"]});
-        }
     })
 }
 

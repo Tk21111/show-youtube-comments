@@ -1,4 +1,4 @@
-//init 
+//init 	
 checkShowScrollbarAndCmd();
 
 function showCommentsOnTheRight() {
@@ -78,3 +78,24 @@ chrome.storage.onChanged.addListener((changes, area) => {
   }
 });
 
+
+//meta panel in short
+if (location.pathname.startsWith("/shorts")) {
+	new MutationObserver((mutations , obs ) => {
+		const meta = document.getElementById("metapanel");
+		if (meta) {
+			obs.disconnect();
+			//init
+			meta.style.opacity = "0";
+
+			//condition
+			meta.addEventListener('mouseenter' , ()=>{
+				meta.style.opacity = "1";
+			})
+			meta.addEventListener('mouseleave' , ()=> {
+				meta.style.opacity = "0";
+			})
+		} 
+		
+	}).observe(document.body , {childList : true , subtree : true});
+}
